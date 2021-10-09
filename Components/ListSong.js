@@ -18,6 +18,7 @@ const {width, heigth} = Dimensions.get('window');
 
 class ListSong extends Component {
   render() {
+    const {navigation} = this.props;
     return (
       <SafeAreaView>
         <View>
@@ -33,10 +34,208 @@ class ListSong extends Component {
             }
           />
         </View>
-        <ScrollView style={{width: width}}>
+        <ScrollView style={styles.scroll}>
           <TouchableOpacity
             onPress={() => {
-              alert('Sẽ chuyển sang giao diện phát nhạc');
+              navigation.navigate('Player');
+            }}>
+            <View style={styles.songItem}>
+              <View style={styles.image}>
+                <Image
+                  source={require('../Assets/ImageSongs/song1YeuLaCuoi.jpg')}
+                  style={styles.imageSong}
+                />
+              </View>
+
+              <View>
+                <View style={styles.txtNameBox}>
+                  <Text style={styles.txtNameSong}>Yêu là cưới</Text>
+                </View>
+                <View style={styles.txtSingerBox}>
+                  <Text style={styles.txtNameSinger}>Phát La Làng</Text>
+                </View>
+              </View>
+            </View>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => {
+              navigation.navigate('Player');
+            }}>
+            <View style={styles.songItem}>
+              <View style={styles.image}>
+                <Image
+                  source={require('../Assets/ImageSongs/song1YeuLaCuoi.jpg')}
+                  style={styles.imageSong}
+                />
+              </View>
+
+              <View>
+                <View style={styles.txtNameBox}>
+                  <Text style={styles.txtNameSong}>Yêu là cưới</Text>
+                </View>
+                <View style={styles.txtSingerBox}>
+                  <Text style={styles.txtNameSinger}>Phát La Làng</Text>
+                </View>
+              </View>
+            </View>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => {
+              navigation.navigate('Player');
+            }}>
+            <View style={styles.songItem}>
+              <View style={styles.image}>
+                <Image
+                  source={require('../Assets/ImageSongs/song1YeuLaCuoi.jpg')}
+                  style={styles.imageSong}
+                />
+              </View>
+
+              <View>
+                <View style={styles.txtNameBox}>
+                  <Text style={styles.txtNameSong}>Yêu là cưới</Text>
+                </View>
+                <View style={styles.txtSingerBox}>
+                  <Text style={styles.txtNameSinger}>Phát La Làng</Text>
+                </View>
+              </View>
+            </View>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => {
+              navigation.navigate('Player');
+            }}>
+            <View style={styles.songItem}>
+              <View style={styles.image}>
+                <Image
+                  source={require('../Assets/ImageSongs/song1YeuLaCuoi.jpg')}
+                  style={styles.imageSong}
+                />
+              </View>
+
+              <View>
+                <View style={styles.txtNameBox}>
+                  <Text style={styles.txtNameSong}>Yêu là cưới</Text>
+                </View>
+                <View style={styles.txtSingerBox}>
+                  <Text style={styles.txtNameSinger}>Phát La Làng</Text>
+                </View>
+              </View>
+            </View>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => {
+              navigation.navigate('Player');
+            }}>
+            <View style={styles.songItem}>
+              <View style={styles.image}>
+                <Image
+                  source={require('../Assets/ImageSongs/song1YeuLaCuoi.jpg')}
+                  style={styles.imageSong}
+                />
+              </View>
+
+              <View>
+                <View style={styles.txtNameBox}>
+                  <Text style={styles.txtNameSong}>Yêu là cưới</Text>
+                </View>
+                <View style={styles.txtSingerBox}>
+                  <Text style={styles.txtNameSinger}>Phát La Làng</Text>
+                </View>
+              </View>
+            </View>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => {
+              navigation.navigate('Player');
+            }}>
+            <View style={styles.songItem}>
+              <View style={styles.image}>
+                <Image
+                  source={require('../Assets/ImageSongs/song1YeuLaCuoi.jpg')}
+                  style={styles.imageSong}
+                />
+              </View>
+
+              <View>
+                <View style={styles.txtNameBox}>
+                  <Text style={styles.txtNameSong}>Yêu là cưới</Text>
+                </View>
+                <View style={styles.txtSingerBox}>
+                  <Text style={styles.txtNameSinger}>Phát La Làng</Text>
+                </View>
+              </View>
+            </View>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => {
+              navigation.navigate('Player');
+            }}>
+            <View style={styles.songItem}>
+              <View style={styles.image}>
+                <Image
+                  source={require('../Assets/ImageSongs/song1YeuLaCuoi.jpg')}
+                  style={styles.imageSong}
+                />
+              </View>
+
+              <View>
+                <View style={styles.txtNameBox}>
+                  <Text style={styles.txtNameSong}>Yêu là cưới</Text>
+                </View>
+                <View style={styles.txtSingerBox}>
+                  <Text style={styles.txtNameSinger}>Phát La Làng</Text>
+                </View>
+              </View>
+            </View>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => {
+              navigation.navigate('Player');
+            }}>
+            <View style={styles.songItem}>
+              <View style={styles.image}>
+                <Image
+                  source={require('../Assets/ImageSongs/song1YeuLaCuoi.jpg')}
+                  style={styles.imageSong}
+                />
+              </View>
+
+              <View>
+                <View style={styles.txtNameBox}>
+                  <Text style={styles.txtNameSong}>Yêu là cưới</Text>
+                </View>
+                <View style={styles.txtSingerBox}>
+                  <Text style={styles.txtNameSinger}>Phát La Làng</Text>
+                </View>
+              </View>
+            </View>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => {
+              navigation.navigate('Player');
+            }}>
+            <View style={styles.songItem}>
+              <View style={styles.image}>
+                <Image
+                  source={require('../Assets/ImageSongs/song1YeuLaCuoi.jpg')}
+                  style={styles.imageSong}
+                />
+              </View>
+
+              <View>
+                <View style={styles.txtNameBox}>
+                  <Text style={styles.txtNameSong}>Yêu là cưới</Text>
+                </View>
+                <View style={styles.txtSingerBox}>
+                  <Text style={styles.txtNameSinger}>Phát La Làng</Text>
+                </View>
+              </View>
+            </View>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => {
+              navigation.navigate('Player');
             }}>
             <View style={styles.songItem}>
               <View style={styles.image}>
@@ -98,6 +297,10 @@ const styles = StyleSheet.create({
   },
   txtNameSinger: {
     color: '#696A68',
+  },
+  scroll: {
+    width: width,
+    marginBottom: 70,
   },
 });
 

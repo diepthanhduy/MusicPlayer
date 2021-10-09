@@ -10,10 +10,17 @@ import {
 
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
-import {NavigationContainer} from '@react-navigation/native';
-import {createStackNavigator} from '@react-navigation/native-stack';
-
 class Player extends Component {
+  state = {
+    name: 'play-circle-outline',
+  };
+  onToggle = () => {
+    if (this.state.name === 'play-circle-outline') {
+      this.setState({name: 'pause-outline'});
+    } else {
+      this.setState({name: 'play-circle-outline'});
+    }
+  };
   render() {
     return (
       <SafeAreaView style={styles.container}>
@@ -34,17 +41,24 @@ class Player extends Component {
               <Ionicons
                 name="play-skip-back-outline"
                 size={28}
-                style={{marginTop: 9}}
+                style={styles.mar9}
               />
             </TouchableOpacity>
             <TouchableOpacity>
-              <Ionicons name="play-circle-outline" size={46} />
+              <Ionicons
+                name={this.state.name}
+                size={46}
+                style={styles.blackColor}
+                onPress={() => {
+                  this.onToggle();
+                }}
+              />
             </TouchableOpacity>
             <TouchableOpacity>
               <Ionicons
                 name="play-skip-forward-outline"
                 size={28}
-                style={{marginTop: 9}}
+                style={styles.mar9}
               />
             </TouchableOpacity>
           </View>
@@ -76,14 +90,14 @@ const styles = StyleSheet.create({
   },
   txtTextBox: {},
   txtNameSong: {
-    color: '#E7E7E7',
+    color: '#171717',
     fontFamily: 'Cochin',
     fontSize: 24,
     fontWeight: 'bold',
     textAlign: 'center',
   },
   txtNameSinger: {
-    color: '#D2D2D2',
+    color: '#6C6C6A',
     textAlign: 'center',
     fontWeight: '300',
   },
@@ -92,6 +106,13 @@ const styles = StyleSheet.create({
     width: '70%',
     justifyContent: 'space-between',
     marginTop: 54,
+  },
+  mar9: {
+    marginTop: 9,
+    color: '#151515',
+  },
+  blackColor: {
+    color: '#151515',
   },
 });
 

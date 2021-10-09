@@ -29,6 +29,7 @@ import {
 } from 'react-native/Libraries/NewAppScreen';
 
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import 'react-native-gesture-handler';
 import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
@@ -36,6 +37,7 @@ import ListSong from './Components/ListSong';
 import PlayList from './Components/PlayList';
 import Chart from './Components/Chart';
 import Menu from './Components/Menu';
+import StackListSongPlayer from './Navigations/StackListSongPlayer';
 
 const {width, heigth} = Dimensions.get('window');
 const Tab = createBottomTabNavigator();
@@ -52,8 +54,8 @@ const App: () => Node = () => {
           inactiveTintColor: '#7C8288',
         }}>
         <Tab.Screen
-          name="ListSong"
-          component={ListSong}
+          name="StackListSongPlayer"
+          component={StackListSongPlayer}
           options={{
             tabBarLabel: 'Home',
             tabBarIcon: ({color}) => (
