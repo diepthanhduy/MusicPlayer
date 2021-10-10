@@ -81,7 +81,18 @@ const styles = StyleSheet.create({
   imageBox: {
     width: 300,
     height: 300,
+    borderRadius: 12,
     marginBottom: 24,
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 5,
+      height: 5,
+    },
+    shadowOpacity: 0.5,
+    shadowRadius: 12,
+    elevation: 5,
+    backgroundColor: 'red',
   },
   imageSong: {
     width: '100%',
