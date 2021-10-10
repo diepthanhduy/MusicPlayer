@@ -24,6 +24,11 @@ class Player extends Component {
   render() {
     return (
       <SafeAreaView style={styles.container}>
+        <Image
+          source={require('../Assets/ImageSongs/song1YeuLaCuoi.jpg')}
+          style={styles.backGround}
+          blurRadius={80}
+        />
         <View style={styles.mainContainer}>
           <View style={styles.imageBox}>
             <Image
@@ -108,7 +113,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   txtNameSinger: {
-    color: '#6C6C6A',
+    color: '#D9D9D9',
     textAlign: 'center',
     fontWeight: '300',
   },
@@ -124,6 +129,13 @@ const styles = StyleSheet.create({
   },
   blackColor: {
     color: '#151515',
+  },
+  backGround: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    width: '100%',
+    height: '100%',
   },
 });
 

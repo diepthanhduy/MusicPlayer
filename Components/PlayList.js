@@ -11,28 +11,15 @@ import {
 
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
+import Modaladdplaylist from './modalAddPlayList';
+
 const {width, heigth} = Dimensions.get('window');
 
 class Playlist extends Component {
   render() {
     return (
       <SafeAreaView>
-        <TouchableOpacity>
-          <View style={styles.itemAdd}>
-            <TouchableOpacity onPress={() => {}}>
-              <View style={styles.btnAdd}>
-                <Ionicons
-                  name="add-circle-outline"
-                  size={36}
-                  style={{color: '#FDF7F8'}}
-                />
-              </View>
-            </TouchableOpacity>
-            <View style={styles.titleBox}>
-              <Text style={styles.txtTitle}>Tạo playlist mới</Text>
-            </View>
-          </View>
-        </TouchableOpacity>
+        <Modaladdplaylist />
         <ScrollView style={styles.scroll}>
           <TouchableOpacity onPress={() => {}}>
             <View style={styles.itemPlayList}>
@@ -53,28 +40,6 @@ const styles = StyleSheet.create({
     width: width,
     marginTop: 12,
     marginBottom: 90,
-  },
-  itemAdd: {
-    alignItems: 'center',
-    flexDirection: 'row',
-    marginLeft: 8,
-    width: width,
-    marginTop: 12,
-  },
-  btnAdd: {
-    width: 82,
-    height: 82,
-    borderRadius: 6,
-    backgroundColor: '#8946AD',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  titleBox: {
-    marginLeft: 14,
-  },
-  txtTitle: {
-    color: '#8946AD',
-    fontWeight: '600',
   },
   itemPlayList: {
     flex: 1,
