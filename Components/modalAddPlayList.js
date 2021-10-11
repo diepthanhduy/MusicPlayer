@@ -8,6 +8,7 @@ import {
   Modal,
   TextInput,
   Button,
+  Image,
 } from 'react-native';
 
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -44,6 +45,11 @@ class Modaladdplaylist extends Component {
           </View>
         </View>
         <Modal visible={this.state.modal}>
+          <Image
+            source={require('../Assets/ImageSongs/backgrd.png')}
+            style={styles.backGround}
+            blurRadius={80}
+          />
           <View style={styles.modal}>
             <TouchableOpacity
               style={styles.touch}
@@ -85,6 +91,13 @@ const styles = StyleSheet.create({
     width: width,
     marginTop: 12,
   },
+  backGround: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    width: '100%',
+    height: '100%',
+  },
   btnAdd: {
     width: 82,
     height: 82,
@@ -103,8 +116,7 @@ const styles = StyleSheet.create({
   modal: {
     fex: 1,
     justifyContent: 'center',
-    marginTop: 150,
-    backgroundColor: '#F0F0F0',
+    marginTop: 8,
     marginLeft: 12,
     marginRight: 12,
     height: 200,
@@ -130,8 +142,9 @@ const styles = StyleSheet.create({
     width: 100,
   },
   btnDone: {
-    marginLeft: 16,
-    marginRight: 16,
+    marginLeft: 92,
+    marginRight: 92,
+    borderRadius: 24,
   },
 });
 

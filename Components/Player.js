@@ -6,6 +6,7 @@ import {
   SafeAreaView,
   Image,
   TouchableOpacity,
+  ScrollView,
 } from 'react-native';
 
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -13,12 +14,20 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 class Player extends Component {
   state = {
     name: 'play-circle-outline',
+    nameHeart: 'heart-outline',
   };
   onToggle = () => {
     if (this.state.name === 'play-circle-outline') {
       this.setState({name: 'pause-outline'});
     } else {
       this.setState({name: 'play-circle-outline'});
+    }
+  };
+  onToggleHeart = () => {
+    if (this.state.nameHeart === 'heart-outline') {
+      this.setState({nameHeart: 'heart-circle-outline'});
+    } else {
+      this.setState({nameHeart: 'heart-outline'});
     }
   };
   render() {
@@ -40,6 +49,18 @@ class Player extends Component {
           <View style={styles.txtTextBox}>
             <Text style={styles.txtNameSong}>Yêu là cưới</Text>
             <Text style={styles.txtNameSinger}>Phát La Làng</Text>
+          </View>
+          <View style={styles.heart}>
+            <TouchableOpacity>
+              <Ionicons
+                name={this.state.nameHeart}
+                size={28}
+                style={styles.mar9}
+                onPress={() => {
+                  this.onToggleHeart();
+                }}
+              />
+            </TouchableOpacity>
           </View>
           <View style={styles.controlBox}>
             <TouchableOpacity>
@@ -80,8 +101,8 @@ const styles = StyleSheet.create({
   },
   mainContainer: {
     flex: 1,
-    justifyContent: 'center',
     alignItems: 'center',
+    marginTop: 96,
   },
   imageBox: {
     width: 300,
@@ -97,7 +118,6 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.5,
     shadowRadius: 12,
     elevation: 5,
-    backgroundColor: 'red',
   },
   imageSong: {
     width: '100%',
@@ -121,7 +141,10 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     width: '70%',
     justifyContent: 'space-between',
-    marginTop: 54,
+    marginTop: 16,
+  },
+  heart: {
+    marginTop: 12,
   },
   mar9: {
     marginTop: 9,
@@ -137,6 +160,7 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
   },
+  lyric: {},
 });
 
 export default Player;

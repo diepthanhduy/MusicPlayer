@@ -7,6 +7,7 @@ import {
   SafeAreaView,
   ScrollView,
   Dimensions,
+  Image,
 } from 'react-native';
 
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -18,7 +19,12 @@ const {width, heigth} = Dimensions.get('window');
 class Playlist extends Component {
   render() {
     return (
-      <SafeAreaView>
+      <SafeAreaView style={styles.container}>
+        <Image
+          source={require('../Assets/ImageSongs/backgrd.png')}
+          style={styles.backGround}
+          blurRadius={80}
+        />
         <Modaladdplaylist />
         <ScrollView style={styles.scroll}>
           <TouchableOpacity onPress={() => {}}>
@@ -36,6 +42,13 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
+  backGround: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    width: '100%',
+    height: '100%',
+  },
   scroll: {
     width: width,
     marginTop: 12,
@@ -49,9 +62,17 @@ const styles = StyleSheet.create({
     marginBottom: 4,
     marginLeft: 16,
     marginRight: 16,
-    backgroundColor: '#DDDDDB',
     padding: 21,
-    borderRadius: 4,
+    borderRadius: 8,
+    backgroundColor: '#f0f0f0',
+    shadowColor: '#FEFEFE',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 8,
+    elevation: 5,
   },
   txtTitlePlayList: {
     color: '#1D1D1D',

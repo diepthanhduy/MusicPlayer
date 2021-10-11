@@ -20,7 +20,12 @@ class ListSong extends Component {
   render() {
     const {navigation} = this.props;
     return (
-      <SafeAreaView>
+      <View>
+        <Image
+          source={require('../Assets/ImageSongs/backgrd.png')}
+          style={styles.backGround}
+          blurRadius={80}
+        />
         <View>
           <Input
             style={styles.search}
@@ -256,7 +261,7 @@ class ListSong extends Component {
             </View>
           </TouchableOpacity>
         </ScrollView>
-      </SafeAreaView>
+      </View>
     );
   }
 }
@@ -264,12 +269,18 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
+  backGround: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    width: '100%',
+    height: '100%',
+  },
   search: {},
   songItem: {
     flex: 1,
     flexDirection: 'row',
     height: 82,
-    backgroundColor: '#DDDDDB',
     borderRadius: 4,
     marginBottom: 8,
     marginLeft: 8,
