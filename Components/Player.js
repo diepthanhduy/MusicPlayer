@@ -12,6 +12,9 @@ import {
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 class Player extends Component {
+  constructor(props) {
+    super(props);
+  }
   state = {
     name: 'play-circle-outline',
     nameHeart: 'heart-outline',
@@ -31,6 +34,7 @@ class Player extends Component {
     }
   };
   render() {
+    const {navigation, route} = this.props;
     return (
       <SafeAreaView style={styles.container}>
         <Image
@@ -47,8 +51,8 @@ class Player extends Component {
           </View>
 
           <View style={styles.txtTextBox}>
-            <Text style={styles.txtNameSong}>Yêu là cưới</Text>
-            <Text style={styles.txtNameSinger}>Phát La Làng</Text>
+            <Text style={styles.txtNameSong}>{route.params.nameSong}</Text>
+            <Text style={styles.txtNameSinger}>{route.params.nameSinger}</Text>
           </View>
           <View style={styles.heart}>
             <TouchableOpacity>

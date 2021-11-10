@@ -17,6 +17,9 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 const {width, heigth} = Dimensions.get('window');
 
 class ListSong extends Component {
+  constructor(props) {
+    super(props);
+  }
   render() {
     const {navigation} = this.props;
     return (
@@ -42,7 +45,11 @@ class ListSong extends Component {
         <ScrollView style={styles.scroll}>
           <TouchableOpacity
             onPress={() => {
-              navigation.navigate('Player');
+              navigation.navigate('Player', {
+                id: 1,
+                nameSong: 'Yêu là cưới params',
+                nameSinger: 'Duy hát hay',
+              });
             }}>
             <View style={styles.songItem}>
               <View style={styles.image}>

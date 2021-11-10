@@ -9,6 +9,8 @@ import {
   TextInput,
   TouchableOpacity,
   Image,
+  FlatList,
+  ActivityIndicator,
 } from 'react-native';
 import {Input} from 'react-native-elements';
 
@@ -17,7 +19,34 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 const {width, heigth} = Dimensions.get('window');
 
 class ListSong extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      data: [],
+      isLoading: true,
+    };
+  }
+
+  async getListSong() {
+    try {
+      const response = await fetch(
+        'https://4716-2001-ee0-56b0-d620-5c76-980f-aa68-1af8.ngrok.io/api/song',
+      );
+      const json = await response.json();
+      this.setState({data: json});
+    } catch (error) {
+      console.log(error);
+    } finally {
+      this.setState({isLoading: false});
+    }
+  }
+
+  componentDidMount() {
+    this.getListSong();
+  }
   render() {
+    const {data, isLoading} = this.state;
     const {navigation} = this.props;
     return (
       <View>
@@ -39,228 +68,44 @@ class ListSong extends Component {
             }
           />
         </View>
-        <ScrollView style={styles.scroll}>
-          <TouchableOpacity
-            onPress={() => {
-              navigation.navigate('Player');
-            }}>
-            <View style={styles.songItem}>
-              <View style={styles.image}>
-                <Image
-                  source={require('../Assets/ImageSongs/song1YeuLaCuoi.jpg')}
-                  style={styles.imageSong}
-                />
-              </View>
+        {isLoading ? (
+          <ActivityIndicator />
+        ) : (
+          <FlatList
+            style={styles.scroll}
+            data={data}
+            keyExtractor={({id}, index) => id}
+            renderItem={({item}) => (
+              <TouchableOpacity
+                onPress={() => {
+                  navigation.navigate('Player', {
+                    FileAnh: item.FileAnh,
+                    FileNhac: item.FileNhac,
+                    nameSong: item.TenBaiHat,
+                    nameSinger: item.TenNgheSi,
+                  });
+                }}>
+                <View style={styles.songItem}>
+                  <View style={styles.image}>
+                    <Image
+                      source={{uri: item.FileAnh}}
+                      style={styles.imageSong}
+                    />
+                  </View>
 
-              <View>
-                <View style={styles.txtNameBox}>
-                  <Text style={styles.txtNameSong}>Yêu là cưới</Text>
+                  <View>
+                    <View style={styles.txtNameBox}>
+                      <Text style={styles.txtNameSong}>{item.TenBaiHat}</Text>
+                    </View>
+                    <View style={styles.txtSingerBox}>
+                      <Text style={styles.txtNameSinger}>{item.TenNgheSi}</Text>
+                    </View>
+                  </View>
                 </View>
-                <View style={styles.txtSingerBox}>
-                  <Text style={styles.txtNameSinger}>Phát La Làng</Text>
-                </View>
-              </View>
-            </View>
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => {
-              navigation.navigate('Player');
-            }}>
-            <View style={styles.songItem}>
-              <View style={styles.image}>
-                <Image
-                  source={require('../Assets/ImageSongs/song1YeuLaCuoi.jpg')}
-                  style={styles.imageSong}
-                />
-              </View>
-
-              <View>
-                <View style={styles.txtNameBox}>
-                  <Text style={styles.txtNameSong}>Yêu là cưới</Text>
-                </View>
-                <View style={styles.txtSingerBox}>
-                  <Text style={styles.txtNameSinger}>Phát La Làng</Text>
-                </View>
-              </View>
-            </View>
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => {
-              navigation.navigate('Player');
-            }}>
-            <View style={styles.songItem}>
-              <View style={styles.image}>
-                <Image
-                  source={require('../Assets/ImageSongs/song1YeuLaCuoi.jpg')}
-                  style={styles.imageSong}
-                />
-              </View>
-
-              <View>
-                <View style={styles.txtNameBox}>
-                  <Text style={styles.txtNameSong}>Yêu là cưới</Text>
-                </View>
-                <View style={styles.txtSingerBox}>
-                  <Text style={styles.txtNameSinger}>Phát La Làng</Text>
-                </View>
-              </View>
-            </View>
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => {
-              navigation.navigate('Player');
-            }}>
-            <View style={styles.songItem}>
-              <View style={styles.image}>
-                <Image
-                  source={require('../Assets/ImageSongs/song1YeuLaCuoi.jpg')}
-                  style={styles.imageSong}
-                />
-              </View>
-
-              <View>
-                <View style={styles.txtNameBox}>
-                  <Text style={styles.txtNameSong}>Yêu là cưới</Text>
-                </View>
-                <View style={styles.txtSingerBox}>
-                  <Text style={styles.txtNameSinger}>Phát La Làng</Text>
-                </View>
-              </View>
-            </View>
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => {
-              navigation.navigate('Player');
-            }}>
-            <View style={styles.songItem}>
-              <View style={styles.image}>
-                <Image
-                  source={require('../Assets/ImageSongs/song1YeuLaCuoi.jpg')}
-                  style={styles.imageSong}
-                />
-              </View>
-
-              <View>
-                <View style={styles.txtNameBox}>
-                  <Text style={styles.txtNameSong}>Yêu là cưới</Text>
-                </View>
-                <View style={styles.txtSingerBox}>
-                  <Text style={styles.txtNameSinger}>Phát La Làng</Text>
-                </View>
-              </View>
-            </View>
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => {
-              navigation.navigate('Player');
-            }}>
-            <View style={styles.songItem}>
-              <View style={styles.image}>
-                <Image
-                  source={require('../Assets/ImageSongs/song1YeuLaCuoi.jpg')}
-                  style={styles.imageSong}
-                />
-              </View>
-
-              <View>
-                <View style={styles.txtNameBox}>
-                  <Text style={styles.txtNameSong}>Yêu là cưới</Text>
-                </View>
-                <View style={styles.txtSingerBox}>
-                  <Text style={styles.txtNameSinger}>Phát La Làng</Text>
-                </View>
-              </View>
-            </View>
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => {
-              navigation.navigate('Player');
-            }}>
-            <View style={styles.songItem}>
-              <View style={styles.image}>
-                <Image
-                  source={require('../Assets/ImageSongs/song1YeuLaCuoi.jpg')}
-                  style={styles.imageSong}
-                />
-              </View>
-
-              <View>
-                <View style={styles.txtNameBox}>
-                  <Text style={styles.txtNameSong}>Yêu là cưới</Text>
-                </View>
-                <View style={styles.txtSingerBox}>
-                  <Text style={styles.txtNameSinger}>Phát La Làng</Text>
-                </View>
-              </View>
-            </View>
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => {
-              navigation.navigate('Player');
-            }}>
-            <View style={styles.songItem}>
-              <View style={styles.image}>
-                <Image
-                  source={require('../Assets/ImageSongs/song1YeuLaCuoi.jpg')}
-                  style={styles.imageSong}
-                />
-              </View>
-
-              <View>
-                <View style={styles.txtNameBox}>
-                  <Text style={styles.txtNameSong}>Yêu là cưới</Text>
-                </View>
-                <View style={styles.txtSingerBox}>
-                  <Text style={styles.txtNameSinger}>Phát La Làng</Text>
-                </View>
-              </View>
-            </View>
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => {
-              navigation.navigate('Player');
-            }}>
-            <View style={styles.songItem}>
-              <View style={styles.image}>
-                <Image
-                  source={require('../Assets/ImageSongs/song1YeuLaCuoi.jpg')}
-                  style={styles.imageSong}
-                />
-              </View>
-
-              <View>
-                <View style={styles.txtNameBox}>
-                  <Text style={styles.txtNameSong}>Yêu là cưới</Text>
-                </View>
-                <View style={styles.txtSingerBox}>
-                  <Text style={styles.txtNameSinger}>Phát La Làng</Text>
-                </View>
-              </View>
-            </View>
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => {
-              navigation.navigate('Player');
-            }}>
-            <View style={styles.songItem}>
-              <View style={styles.image}>
-                <Image
-                  source={require('../Assets/ImageSongs/song1YeuLaCuoi.jpg')}
-                  style={styles.imageSong}
-                />
-              </View>
-
-              <View>
-                <View style={styles.txtNameBox}>
-                  <Text style={styles.txtNameSong}>Yêu là cưới</Text>
-                </View>
-                <View style={styles.txtSingerBox}>
-                  <Text style={styles.txtNameSinger}>Phát La Làng</Text>
-                </View>
-              </View>
-            </View>
-          </TouchableOpacity>
-        </ScrollView>
+              </TouchableOpacity>
+            )}
+          />
+        )}
       </View>
     );
   }

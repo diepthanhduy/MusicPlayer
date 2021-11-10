@@ -32,6 +32,18 @@ class Menu extends Component {
             </View>
           </View>
         </TouchableOpacity>
+        <TouchableOpacity style={{width: 120}}>
+          <View style={styles.logOut}>
+            <Ionicons
+              name="log-in-outline"
+              size={32}
+              style={{color: '#000', marginRight: 8, marginLeft: 16}}
+            />
+            <View>
+              <Text style={{color: '#000'}}>Đăng nhập</Text>
+            </View>
+          </View>
+        </TouchableOpacity>
       </View>
     );
   }
