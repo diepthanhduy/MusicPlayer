@@ -69,28 +69,6 @@ class ListSong extends Component {
               </View>
             </View>
           </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => {
-              navigation.navigate('Player');
-            }}>
-            <View style={styles.songItem}>
-              <View style={styles.image}>
-                <Image
-                  source={require('../Assets/ImageSongs/song1YeuLaCuoi.jpg')}
-                  style={styles.imageSong}
-                />
-              </View>
-
-              <View>
-                <View style={styles.txtNameBox}>
-                  <Text style={styles.txtNameSong}>Yêu là cưới</Text>
-                </View>
-                <View style={styles.txtSingerBox}>
-                  <Text style={styles.txtNameSinger}>Phát La Làng</Text>
-                </View>
-              </View>
-            </View>
-          </TouchableOpacity>
         </ScrollView>
       </View>
     );

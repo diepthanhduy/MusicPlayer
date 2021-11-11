@@ -16,7 +16,12 @@ import {Input} from 'react-native-elements';
 
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
-const {width, heigth} = Dimensions.get('window');
+const {width} = Dimensions.get('window');
+
+const srtHostImg = 'https://54e0-14-242-186-42.ngrok.io/img/';
+const strHostMp3 = 'https://54e0-14-242-186-42.ngrok.io/music/';
+
+//./ngrok authtoken 20Mvf0gzp6spGCIwCNfs8hsWYbE_3FFgUFUHbWXpae2P1nMeb
 
 class ListSong extends Component {
   constructor(props) {
@@ -31,7 +36,7 @@ class ListSong extends Component {
   async getListSong() {
     try {
       const response = await fetch(
-        'https://4716-2001-ee0-56b0-d620-5c76-980f-aa68-1af8.ngrok.io/api/song',
+        'https://54e0-14-242-186-42.ngrok.io/api/song',
       );
       const json = await response.json();
       this.setState({data: json});
@@ -79,8 +84,8 @@ class ListSong extends Component {
               <TouchableOpacity
                 onPress={() => {
                   navigation.navigate('Player', {
-                    FileAnh: item.FileAnh,
-                    FileNhac: item.FileNhac,
+                    FileAnh: srtHostImg + item.FileAnh,
+                    FileNhac: strHostMp3 + item.FileNhac,
                     nameSong: item.TenBaiHat,
                     nameSinger: item.TenNgheSi,
                   });
@@ -88,7 +93,7 @@ class ListSong extends Component {
                 <View style={styles.songItem}>
                   <View style={styles.image}>
                     <Image
-                      source={{uri: item.FileAnh}}
+                      source={{uri: srtHostImg + item.FileAnh}}
                       style={styles.imageSong}
                     />
                   </View>
