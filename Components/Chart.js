@@ -15,6 +15,7 @@ import {Input} from 'react-native-elements';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 const {width, heigth} = Dimensions.get('window');
+//https://file-examples-com.github.io/uploads/2017/11/file_example_MP3_700KB.mp3
 
 class ListSong extends Component {
   constructor(props) {
@@ -49,6 +50,8 @@ class ListSong extends Component {
                 id: 1,
                 nameSong: 'Yêu là cưới params',
                 nameSinger: 'Duy hát hay',
+                FileNhac:
+                  'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3',
               });
             }}>
             <View style={styles.songItem}>

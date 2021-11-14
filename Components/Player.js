@@ -1,4 +1,4 @@
-import React, {Component, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   View,
   StyleSheet,
@@ -11,41 +11,57 @@ import {
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Sound from 'react-native-sound';
 
+const srtHostImg = 'https://4dd3-14-242-186-42.ngrok.io/img/';
+const strHostMp3 = 'https://4dd3-14-242-186-42.ngrok.io/music/';
+
 const Player = ({navigation, route}) => {
   const [name, setName] = useState('play-circle-outline');
   const [nameHeart, setNameHeart] = useState('heart-outline');
-  const [music, setMusic] = useState(null);
   const [temp, setTemp] = useState(0);
+  const [music, setMusic] = useState();
+  const [urlMusic, setUrl] = useState(route.params.FileNhac);
+  const [urlImage, setImg] = useState(route.params.FileAnh);
+  const [nameSong, setNameSong] = useState(route.params.nameSong);
+  const [nameSinger, setNameSinger] = useState(route.params.nameSinger);
+
+  //load and play music
   const play = () => {
-    let sound = new Sound(
-      'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3',
-      undefined,
-      error => {
-        if (error) {
-          console.log(error);
-          return;
-        } else {
-          console.log('Playing sound');
-          sound.play();
-        }
-      },
-    );
-    setMusic(sound);
-    setTemp(1);
+    var sound = new Sound(urlMusic, null, error => {
+      if (error) {
+        console.log(error);
+        return;
+      }
+      sound.play(success => {
+        console.log('end ', success);
+        setName('play-circle-outline');
+        sound.release();
+      });
+      setMusic(sound);
+      setTemp(1);
+    });
   };
+
+  //handle on click next or back song
+  const changeSong = () => {};
+
+  //Change pause or play button
   const onToggle = () => {
     if (name === 'play-circle-outline') {
       setName('pause-outline');
       if (temp === 0) {
         play();
       } else {
-        music.play();
+        music.play(success => {
+          setName('play-circle-outline');
+        });
       }
     } else {
       setName('play-circle-outline');
       music.pause();
     }
   };
+
+  //change icon heart
   const onToggleHeart = () => {
     if (nameHeart === 'heart-outline') {
       setNameHeart('heart-circle-outline');
@@ -53,6 +69,7 @@ const Player = ({navigation, route}) => {
       setNameHeart('heart-outline');
     }
   };
+
   return (
     <SafeAreaView style={styles.container}>
       <Image
