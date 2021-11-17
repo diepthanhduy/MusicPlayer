@@ -23,6 +23,7 @@ const Player = ({navigation, route}) => {
   const [urlImage, setImg] = useState(route.params.FileAnh);
   const [nameSong, setNameSong] = useState(route.params.nameSong);
   const [nameSinger, setNameSinger] = useState(route.params.nameSinger);
+  const [data, setData] = useState([]);
 
   //load and play music
   const play = () => {
@@ -42,7 +43,16 @@ const Player = ({navigation, route}) => {
   };
 
   //handle on click next or back song
-  const changeSong = () => {};
+  const changeSong = () => {
+    return fetch('https://reactnative.dev/movies.json')
+      .then(response => response.json())
+      .then(json => {
+        setData(json);
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  };
 
   //Change pause or play button
   const onToggle = () => {

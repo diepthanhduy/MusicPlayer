@@ -33,23 +33,23 @@ class ListSong extends Component {
     };
   }
 
-  // async getListSong() {
-  //   try {
-  //     const response = await fetch(
-  //       'https://4dd3-14-242-186-42.ngrok.io/api/song',
-  //     );
-  //     const json = await response.json();
-  //     this.setState({data: json});
-  //   } catch (error) {
-  //     console.log(error);
-  //   } finally {
-  //     this.setState({isLoading: false});
-  //   }
-  // }
+  async getListSong() {
+    try {
+      const response = await fetch(
+        'https://4dd3-14-242-186-42.ngrok.io/api/song',
+      );
+      const json = await response.json();
+      this.setState({data: json});
+    } catch (error) {
+      console.log(error);
+    } finally {
+      this.setState({isLoading: false});
+    }
+  }
 
-  // componentDidMount() {
-  //   this.getListSong();
-  // }
+  componentDidMount() {
+    this.getListSong();
+  }
   render() {
     const {data, isLoading} = this.state;
     const {navigation} = this.props;
