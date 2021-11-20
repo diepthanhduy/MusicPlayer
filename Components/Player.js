@@ -13,17 +13,17 @@ import Sound from 'react-native-sound';
 
 const srtHostImg = 'https://4dd3-14-242-186-42.ngrok.io/img/';
 const strHostMp3 = 'https://4dd3-14-242-186-42.ngrok.io/music/';
+var temp = 0;
 
 const Player = ({navigation, route}) => {
   const [name, setName] = useState('play-circle-outline');
   const [nameHeart, setNameHeart] = useState('heart-outline');
-  const [temp, setTemp] = useState(0);
   const [music, setMusic] = useState();
   const [urlMusic, setUrl] = useState(route.params.FileNhac);
   const [urlImage, setImg] = useState(route.params.FileAnh);
   const [nameSong, setNameSong] = useState(route.params.nameSong);
   const [nameSinger, setNameSinger] = useState(route.params.nameSinger);
-  const [data, setData] = useState([]);
+  // const [temp, setTemp] = useState(0);
 
   //load and play music
   const play = () => {
@@ -37,17 +37,23 @@ const Player = ({navigation, route}) => {
         setName('play-circle-outline');
         sound.release();
       });
+      temp = 1;
       setMusic(sound);
-      setTemp(1);
     });
   };
 
   //handle on click next or back song
   const changeSong = () => {
-    return fetch('https://reactnative.dev/movies.json')
+    //nhận một bài hát mới khi bấm next
+    music.pause();
+    setMusic();
+    fetch('https://reactnative.dev/movies.json')
       .then(response => response.json())
       .then(json => {
-        setData(json);
+        //set các state lại theo bài hát mới
+        setUrl('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-5.mp3');
+        //gọi lại hàm play()
+        play();
       })
       .catch(error => {
         console.error(error);
@@ -89,15 +95,12 @@ const Player = ({navigation, route}) => {
       />
       <View style={styles.mainContainer}>
         <View style={styles.imageBox}>
-          <Image
-            source={{uri: route.params.FileAnh}}
-            style={styles.imageSong}
-          />
+          <Image source={{uri: urlImage}} style={styles.imageSong} />
         </View>
 
         <View style={styles.txtTextBox}>
-          <Text style={styles.txtNameSong}>{route.params.nameSong}</Text>
-          <Text style={styles.txtNameSinger}>{route.params.nameSinger}</Text>
+          <Text style={styles.txtNameSong}>{nameSong}</Text>
+          <Text style={styles.txtNameSinger}>{nameSinger}</Text>
         </View>
         <View style={styles.heart}>
           <TouchableOpacity>
@@ -134,6 +137,9 @@ const Player = ({navigation, route}) => {
               name="play-skip-forward-outline"
               size={28}
               style={styles.mar9}
+              onPress={() => {
+                changeSong();
+              }}
             />
           </TouchableOpacity>
         </View>
