@@ -8,25 +8,7 @@
 
 import React from 'react';
 import type {Node} from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-  Dimensions,
-  TouchableOpacity,
-} from 'react-native';
-
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+import {Dimensions} from 'react-native';
 
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import 'react-native-gesture-handler';
@@ -79,7 +61,7 @@ const App: () => Node = () => {
           }}
         />
 
-        <Tab.Screen
+        {/* <Tab.Screen
           name="Chart"
           component={Chart}
           options={{
@@ -92,7 +74,7 @@ const App: () => Node = () => {
               />
             ),
           }}
-        />
+        /> */}
 
         <Tab.Screen
           name="Menu"
@@ -109,27 +91,27 @@ const App: () => Node = () => {
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  mainContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  bottomBox: {
-    paddingVertical: 10,
-    width: width,
-    alignItems: 'center',
-    borderTopWidth: 0.35,
-    borderColor: '#ccc',
-  },
-  bottomControls: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    width: '80%',
-  },
-});
+// const styles = StyleSheet.create({
+//   container: {
+//     flex: 1,
+//   },
+//   mainContainer: {
+//     flex: 1,
+//     justifyContent: 'center',
+//     alignItems: 'center',
+//   },
+//   bottomBox: {
+//     paddingVertical: 10,
+//     width: width,
+//     alignItems: 'center',
+//     borderTopWidth: 0.35,
+//     borderColor: '#ccc',
+//   },
+//   bottomControls: {
+//     flexDirection: 'row',
+//     justifyContent: 'space-between',
+//     width: '80%',
+//   },
+// });
 
 export default App;

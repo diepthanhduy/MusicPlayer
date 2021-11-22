@@ -6,14 +6,16 @@ import {
   SafeAreaView,
   Image,
   TouchableOpacity,
+  ActivityIndicator,
 } from 'react-native';
 
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Sound from 'react-native-sound';
 
-const srtHostImg = 'https://4dd3-14-242-186-42.ngrok.io/img/';
-const strHostMp3 = 'https://4dd3-14-242-186-42.ngrok.io/music/';
-var temp = 0;
+const srtHostImg =
+  'https://f300-2001-ee0-56b0-d620-69eb-d2ea-e120-f217.ngrok.io/img/';
+const strHostMp3 =
+  'https://f300-2001-ee0-56b0-d620-69eb-d2ea-e120-f217.ngrok.io/music/';
 
 const Player = ({navigation, route}) => {
   const [name, setName] = useState('play-circle-outline');
@@ -23,7 +25,8 @@ const Player = ({navigation, route}) => {
   const [urlImage, setImg] = useState(route.params.FileAnh);
   const [nameSong, setNameSong] = useState(route.params.nameSong);
   const [nameSinger, setNameSinger] = useState(route.params.nameSinger);
-  // const [temp, setTemp] = useState(0);
+  const [temp, setTemp] = useState(0);
+  const [isLoading, setLoading] = useState(true);
 
   //load and play music
   const play = () => {
@@ -37,7 +40,8 @@ const Player = ({navigation, route}) => {
         setName('play-circle-outline');
         sound.release();
       });
-      temp = 1;
+      setLoading(true);
+      setTemp(1);
       setMusic(sound);
     });
   };
@@ -46,18 +50,23 @@ const Player = ({navigation, route}) => {
   const changeSong = () => {
     //nhận một bài hát mới khi bấm next
     music.pause();
-    setMusic();
-    fetch('https://reactnative.dev/movies.json')
+    setLoading(false);
+    fetch(
+      'https://f300-2001-ee0-56b0-d620-69eb-d2ea-e120-f217.ngrok.io/api/randsong',
+    )
       .then(response => response.json())
       .then(json => {
-        //set các state lại theo bài hát mới
-        setUrl('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-5.mp3');
-        //gọi lại hàm play()
-        play();
+        setUrl(strHostMp3 + json.FileNhac);
+        setImg(srtHostImg + json.FileAnh);
+        setNameSong(json.TenBaiHat);
+        setNameSinger(json.TenNgheSi);
+        setLoading(true);
       })
       .catch(error => {
         console.error(error);
       });
+    play();
+    console.log(urlMusic);
   };
 
   //Change pause or play button
@@ -65,6 +74,7 @@ const Player = ({navigation, route}) => {
     if (name === 'play-circle-outline') {
       setName('pause-outline');
       if (temp === 0) {
+        setLoading(false);
         play();
       } else {
         music.play(success => {
@@ -89,7 +99,7 @@ const Player = ({navigation, route}) => {
   return (
     <SafeAreaView style={styles.container}>
       <Image
-        source={{uri: route.params.FileAnh}}
+        source={{uri: urlImage}}
         style={styles.backGround}
         blurRadius={80}
       />
@@ -122,16 +132,21 @@ const Player = ({navigation, route}) => {
               style={styles.mar9}
             />
           </TouchableOpacity>
-          <TouchableOpacity>
-            <Ionicons
-              name={name}
-              size={46}
-              style={styles.blackColor}
-              onPress={() => {
-                onToggle();
-              }}
-            />
-          </TouchableOpacity>
+          {isLoading ? (
+            <TouchableOpacity>
+              <Ionicons
+                name={name}
+                size={46}
+                style={styles.blackColor}
+                onPress={() => {
+                  onToggle();
+                }}
+              />
+            </TouchableOpacity>
+          ) : (
+            <ActivityIndicator />
+          )}
+
           <TouchableOpacity>
             <Ionicons
               name="play-skip-forward-outline"

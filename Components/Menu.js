@@ -52,7 +52,7 @@ class Menu extends Component {
       body: JSON.stringify(data),
     };
     fetch(
-      'https://6874-2001-ee0-56b0-d620-ad20-5925-e3c6-c7cb.ngrok.io/api/login',
+      'https://f676-2001-ee0-56b0-d620-3563-5d49-cd2-7b90.ngrok.io/api/login',
       requestOptions,
     )
       .then(Response => Response.json())
@@ -90,7 +90,7 @@ class Menu extends Component {
       body: JSON.stringify(data),
     };
     fetch(
-      'https://6874-2001-ee0-56b0-d620-ad20-5925-e3c6-c7cb.ngrok.io/api/register',
+      'https://bcaa-2001-ee0-56b0-d620-ad20-5925-e3c6-c7cb.ngrok.io/api/register',
       requestOptions,
     )
       .then(Response => Response.json())
