@@ -13,23 +13,39 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import Sound from 'react-native-sound';
 
 const srtHostImg =
-  'https://f300-2001-ee0-56b0-d620-69eb-d2ea-e120-f217.ngrok.io/img/';
+  'https://3b44-2001-ee0-56b0-d620-b927-ad0e-3b16-a2e0.ngrok.io/img/';
 const strHostMp3 =
-  'https://f300-2001-ee0-56b0-d620-69eb-d2ea-e120-f217.ngrok.io/music/';
+  'https://3b44-2001-ee0-56b0-d620-b927-ad0e-3b16-a2e0.ngrok.io/music/';
 
 const Player = ({navigation, route}) => {
-  const [name, setName] = useState('play-circle-outline');
+  const [name, setName] = useState('pause-outline');
   const [nameHeart, setNameHeart] = useState('heart-outline');
-  const [music, setMusic] = useState();
+  const [music, setMusic] = useState({});
   const [urlMusic, setUrl] = useState(route.params.FileNhac);
   const [urlImage, setImg] = useState(route.params.FileAnh);
   const [nameSong, setNameSong] = useState(route.params.nameSong);
   const [nameSinger, setNameSinger] = useState(route.params.nameSinger);
-  const [temp, setTemp] = useState(0);
-  const [isLoading, setLoading] = useState(true);
+  //const [temp, setTemp] = useState(0);
+  const [isLoading, setLoading] = useState(false);
+  // const play = () => {
+  //   var sound = new Sound(urlMusic, null, error => {
+  //     if (error) {
+  //       console.log(error);
+  //       return;
+  //     }
+  //     sound.play(success => {
+  //       console.log('end ', success);
+  //       setName('play-circle-outline');
+  //       sound.release();
+  //     });
+  //     setLoading(true);
+  //     setTemp(1);
+  //     setMusic(sound);
+  //   });
+  // };
 
   //load and play music
-  const play = () => {
+  useEffect(() => {
     var sound = new Sound(urlMusic, null, error => {
       if (error) {
         console.log(error);
@@ -41,46 +57,58 @@ const Player = ({navigation, route}) => {
         sound.release();
       });
       setLoading(true);
-      setTemp(1);
       setMusic(sound);
     });
-  };
+  }, [urlMusic]);
 
   //handle on click next or back song
   const changeSong = () => {
     //nhận một bài hát mới khi bấm next
-    music.pause();
-    setLoading(false);
-    fetch(
-      'https://f300-2001-ee0-56b0-d620-69eb-d2ea-e120-f217.ngrok.io/api/randsong',
-    )
-      .then(response => response.json())
-      .then(json => {
-        setUrl(strHostMp3 + json.FileNhac);
-        setImg(srtHostImg + json.FileAnh);
-        setNameSong(json.TenBaiHat);
-        setNameSinger(json.TenNgheSi);
-        setLoading(true);
-      })
-      .catch(error => {
-        console.error(error);
-      });
-    play();
-    console.log(urlMusic);
+    if (name === 'pause-outline') {
+      music.pause();
+      setLoading(false);
+      fetch(
+        'https://3b44-2001-ee0-56b0-d620-b927-ad0e-3b16-a2e0.ngrok.io/api/randsong',
+      )
+        .then(response => response.json())
+        .then(json => {
+          setUrl(strHostMp3 + json.FileNhac);
+          setImg(srtHostImg + json.FileAnh);
+          setNameSong(json.TenBaiHat);
+          setNameSinger(json.TenNgheSi);
+          setLoading(true);
+        })
+        .catch(error => {
+          console.error(error);
+        });
+    } else {
+      setLoading(false);
+      fetch(
+        'https://3b44-2001-ee0-56b0-d620-b927-ad0e-3b16-a2e0.ngrok.io/api/randsong',
+      )
+        .then(response => response.json())
+        .then(json => {
+          setUrl(strHostMp3 + json.FileNhac);
+          setImg(srtHostImg + json.FileAnh);
+          setNameSong(json.TenBaiHat);
+          setNameSinger(json.TenNgheSi);
+          setName('pause-outline');
+          setLoading(true);
+        })
+        .catch(error => {
+          console.error(error);
+        });
+    }
   };
 
   //Change pause or play button
   const onToggle = () => {
     if (name === 'play-circle-outline') {
       setName('pause-outline');
-      if (temp === 0) {
-        setLoading(false);
-        play();
-      } else {
-        music.play(success => {
-          setName('play-circle-outline');
-        });
-      }
+      music.play(success => {
+        setName('play-circle-outline');
+      });
+      // }
     } else {
       setName('play-circle-outline');
       music.pause();

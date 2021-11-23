@@ -14,14 +14,16 @@ import {
 } from 'react-native';
 import {Input} from 'react-native-elements';
 
+import Player from './Player';
+
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 const {width} = Dimensions.get('window');
 
 const srtHostImg =
-  'https://f300-2001-ee0-56b0-d620-69eb-d2ea-e120-f217.ngrok.io/img/';
+  'https://3b44-2001-ee0-56b0-d620-b927-ad0e-3b16-a2e0.ngrok.io/img/';
 const strHostMp3 =
-  'https://f300-2001-ee0-56b0-d620-69eb-d2ea-e120-f217.ngrok.io/music/';
+  'https://3b44-2001-ee0-56b0-d620-b927-ad0e-3b16-a2e0.ngrok.io/music/';
 
 //./ngrok authtoken 20Mvf0gzp6spGCIwCNfs8hsWYbE_3FFgUFUHbWXpae2P1nMeb
 
@@ -38,7 +40,7 @@ class ListSong extends Component {
   async getListSong() {
     try {
       const response = await fetch(
-        'https://f300-2001-ee0-56b0-d620-69eb-d2ea-e120-f217.ngrok.io/api/song',
+        'https://3b44-2001-ee0-56b0-d620-b927-ad0e-3b16-a2e0.ngrok.io/api/song',
       );
       const json = await response.json();
       this.setState({data: json});
@@ -91,6 +93,7 @@ class ListSong extends Component {
                     nameSong: item.TenBaiHat,
                     nameSinger: item.TenNgheSi,
                   });
+                  this.setState({ishow: true});
                 }}>
                 <View style={styles.songItem}>
                   <View style={styles.image}>
