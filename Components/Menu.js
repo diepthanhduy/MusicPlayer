@@ -6,9 +6,11 @@ import {
   TouchableOpacity,
   Modal,
   TextInput,
+  Alert,
 } from 'react-native';
 
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 class Menu extends Component {
   state = {
@@ -19,6 +21,7 @@ class Menu extends Component {
     pass: '',
     userName: '',
     returnData: {},
+    ten: {},
   };
   setVisibleLogin = () => {
     this.setState({
@@ -38,7 +41,7 @@ class Menu extends Component {
     this.setState({returnData: {}});
   };
 
-  //Login
+  //Xu ly login
   login = () => {
     const data = {TaiKhoan: this.state.user, MatKhau: this.state.pass};
     console.log(data);
@@ -52,27 +55,29 @@ class Menu extends Component {
       body: JSON.stringify(data),
     };
     fetch(
-      'https://f676-2001-ee0-56b0-d620-3563-5d49-cd2-7b90.ngrok.io/api/login',
+      'https://b25c-2001-ee0-56b6-3790-7591-b50a-6b03-7ad8.ngrok.io/api/login',
       requestOptions,
     )
       .then(Response => Response.json())
       .then(result => {
         if (result.TaiKhoan != null) {
           console.log(result);
-          alert('Đăng nhập thành công');
+          Alert.alert('Thông báo', 'Đăng nhập thành công');
           this.setState({returnData: result});
+          global.user = result;
           this.setState({modalLogin: false});
           this.setState({toggleBtn: false});
         } else {
-          alert('Đăng nhập thất bại');
+          Alert.alert('Thông báo', 'Đăng nhập thất bại');
         }
       })
       .catch(error => {
+        Alert.alert('Thông báo', 'Vui lòng kiểm tra mạng');
         console.error(error);
       });
   };
 
-  // Nut dang ky
+  // Xu ly dang ky
   register = () => {
     const data = {
       TaiKhoan: this.state.user,
@@ -90,22 +95,24 @@ class Menu extends Component {
       body: JSON.stringify(data),
     };
     fetch(
-      'https://bcaa-2001-ee0-56b0-d620-ad20-5925-e3c6-c7cb.ngrok.io/api/register',
+      'https://b25c-2001-ee0-56b6-3790-7591-b50a-6b03-7ad8.ngrok.io/api/register',
       requestOptions,
     )
       .then(Response => Response.json())
       .then(result => {
         if (result.TaiKhoan != null) {
           console.log(result);
-          alert('Đăng ký thành công');
+          Alert.alert('Thông báo', 'Đăng ký thành công');
           this.setState({returnData: result});
+          this.storeData(result);
           this.setState({modalRegister: false});
           this.setState({toggleBtn: false});
         } else {
-          alert('Đăng ký thất bại');
+          Alert.alert('Thông báo', 'Đăng ký thất bại');
         }
       })
       .catch(error => {
+        Alert.alert('Thông báo', 'Vui lòng kiểm tra mạng');
         console.error(error);
       });
   };

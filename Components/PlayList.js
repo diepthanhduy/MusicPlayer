@@ -15,7 +15,6 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import Modaladdplaylist from './modalAddPlayList';
 
 const {width, heigth} = Dimensions.get('window');
-
 class Playlist extends Component {
   render() {
     return (

@@ -13,14 +13,14 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import Sound from 'react-native-sound';
 
 const srtHostImg =
-  'https://3b44-2001-ee0-56b0-d620-b927-ad0e-3b16-a2e0.ngrok.io/img/';
+  'https://b25c-2001-ee0-56b6-3790-7591-b50a-6b03-7ad8.ngrok.io/img/';
 const strHostMp3 =
-  'https://3b44-2001-ee0-56b0-d620-b927-ad0e-3b16-a2e0.ngrok.io/music/';
+  'https://b25c-2001-ee0-56b6-3790-7591-b50a-6b03-7ad8.ngrok.io/music/';
 
 const Player = ({navigation, route}) => {
   const [name, setName] = useState('pause-outline');
   const [nameHeart, setNameHeart] = useState('heart-outline');
-  const [music, setMusic] = useState({});
+  //const [music, setMusic] = useState({});
   const [urlMusic, setUrl] = useState(route.params.FileNhac);
   const [urlImage, setImg] = useState(route.params.FileAnh);
   const [nameSong, setNameSong] = useState(route.params.nameSong);
@@ -57,7 +57,8 @@ const Player = ({navigation, route}) => {
         sound.release();
       });
       setLoading(true);
-      setMusic(sound);
+      //setMusic(sound);
+      global.music = sound;
     });
   }, [urlMusic]);
 
@@ -65,10 +66,10 @@ const Player = ({navigation, route}) => {
   const changeSong = () => {
     //nhận một bài hát mới khi bấm next
     if (name === 'pause-outline') {
-      music.pause();
+      global.music.pause();
       setLoading(false);
       fetch(
-        'https://3b44-2001-ee0-56b0-d620-b927-ad0e-3b16-a2e0.ngrok.io/api/randsong',
+        'https://b25c-2001-ee0-56b6-3790-7591-b50a-6b03-7ad8.ngrok.io/api/randsong',
       )
         .then(response => response.json())
         .then(json => {
@@ -84,7 +85,7 @@ const Player = ({navigation, route}) => {
     } else {
       setLoading(false);
       fetch(
-        'https://3b44-2001-ee0-56b0-d620-b927-ad0e-3b16-a2e0.ngrok.io/api/randsong',
+        'https://b25c-2001-ee0-56b6-3790-7591-b50a-6b03-7ad8.ngrok.io/api/randsong',
       )
         .then(response => response.json())
         .then(json => {
@@ -105,13 +106,13 @@ const Player = ({navigation, route}) => {
   const onToggle = () => {
     if (name === 'play-circle-outline') {
       setName('pause-outline');
-      music.play(success => {
+      global.music.play(success => {
         setName('play-circle-outline');
       });
       // }
     } else {
       setName('play-circle-outline');
-      music.pause();
+      global.music.pause();
     }
   };
 

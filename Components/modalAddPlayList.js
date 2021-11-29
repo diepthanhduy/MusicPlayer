@@ -9,6 +9,7 @@ import {
   TextInput,
   Button,
   Image,
+  Alert,
 } from 'react-native';
 
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -19,10 +20,17 @@ class Modaladdplaylist extends Component {
   state = {
     modal: false,
   };
-  setVisible = () => {
-    this.setState({
-      modal: !this.state.modal ? true : false,
-    });
+  checkUser = () => {
+    if (typeof global.user !== 'undefined' && this.state.modal == false) {
+      this.setState({modal: true});
+    } else {
+      Alert.alert('Thông báo', 'Vui lòng đăng nhập');
+    }
+  };
+  back = () => {
+    this.state.modal
+      ? this.setState({modal: false})
+      : this.setState({modal: true});
   };
   render() {
     return (
@@ -30,7 +38,7 @@ class Modaladdplaylist extends Component {
         <View style={styles.itemAdd}>
           <TouchableOpacity
             onPress={() => {
-              this.setVisible();
+              this.checkUser();
             }}>
             <View style={styles.btnAdd}>
               <Ionicons
@@ -54,7 +62,7 @@ class Modaladdplaylist extends Component {
             <TouchableOpacity
               style={styles.touch}
               onPress={() => {
-                this.setVisible();
+                this.back();
               }}>
               <View style={styles.btnReturn}>
                 <Ionicons

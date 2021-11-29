@@ -14,16 +14,14 @@ import {
 } from 'react-native';
 import {Input} from 'react-native-elements';
 
-import Player from './Player';
-
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 const {width} = Dimensions.get('window');
 
 const srtHostImg =
-  'https://3b44-2001-ee0-56b0-d620-b927-ad0e-3b16-a2e0.ngrok.io/img/';
+  'https://b25c-2001-ee0-56b6-3790-7591-b50a-6b03-7ad8.ngrok.io/img/';
 const strHostMp3 =
-  'https://3b44-2001-ee0-56b0-d620-b927-ad0e-3b16-a2e0.ngrok.io/music/';
+  'https://b25c-2001-ee0-56b6-3790-7591-b50a-6b03-7ad8.ngrok.io/music/';
 
 //./ngrok authtoken 20Mvf0gzp6spGCIwCNfs8hsWYbE_3FFgUFUHbWXpae2P1nMeb
 
@@ -40,7 +38,7 @@ class ListSong extends Component {
   async getListSong() {
     try {
       const response = await fetch(
-        'https://3b44-2001-ee0-56b0-d620-b927-ad0e-3b16-a2e0.ngrok.io/api/song',
+        'https://b25c-2001-ee0-56b6-3790-7591-b50a-6b03-7ad8.ngrok.io/api/song',
       );
       const json = await response.json();
       this.setState({data: json});
@@ -48,6 +46,14 @@ class ListSong extends Component {
       console.log(error);
     } finally {
       this.setState({isLoading: false});
+    }
+  }
+
+  checkIsPlaying() {
+    if (typeof global.music !== 'undefined') {
+      if (global.music._playing) {
+        global.music.pause();
+      }
     }
   }
 
@@ -75,6 +81,7 @@ class ListSong extends Component {
                 size={24}
               />
             }
+            onChange={() => {}}
           />
         </View>
         {isLoading ? (
@@ -93,7 +100,7 @@ class ListSong extends Component {
                     nameSong: item.TenBaiHat,
                     nameSinger: item.TenNgheSi,
                   });
-                  this.setState({ishow: true});
+                  this.checkIsPlaying();
                 }}>
                 <View style={styles.songItem}>
                   <View style={styles.image}>
