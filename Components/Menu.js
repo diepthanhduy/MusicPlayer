@@ -10,7 +10,6 @@ import {
 } from 'react-native';
 
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 class Menu extends Component {
   state = {
@@ -39,6 +38,7 @@ class Menu extends Component {
   logout = () => {
     this.setState({toggleBtn: true});
     this.setState({returnData: {}});
+    global.user = undefined;
   };
 
   //Xu ly login
@@ -104,7 +104,7 @@ class Menu extends Component {
           console.log(result);
           Alert.alert('Thông báo', 'Đăng ký thành công');
           this.setState({returnData: result});
-          this.storeData(result);
+          global.user = result;
           this.setState({modalRegister: false});
           this.setState({toggleBtn: false});
         } else {

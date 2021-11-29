@@ -16,6 +16,36 @@ import Modaladdplaylist from './modalAddPlayList';
 
 const {width, heigth} = Dimensions.get('window');
 class Playlist extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      data: [],
+    };
+  }
+
+  //Load playlist đã có sẵn của một user
+  loadPlayList() {
+    // fetch(
+    //   'https://b25c-2001-ee0-56b6-3790-7591-b50a-6b03-7ad8.ngrok.io/api/randsong',
+    // )
+    //   .then(response => response.json())
+    //   .then(json => {
+    //     this.setState({data: json});
+    //   })
+    //   .catch(error => {
+    //     console.error(error);
+    //   });
+    console.log('Tao là hàm load playlist nè');
+  }
+  componentDidMount() {
+    this.loadPlayList();
+  }
+
+  //function callback ở component gọi khi thêm xong
+  reLoad(newList) {
+    this.setState({data: newList});
+  }
   render() {
     return (
       <SafeAreaView style={styles.container}>
@@ -24,7 +54,7 @@ class Playlist extends Component {
           style={styles.backGround}
           blurRadius={80}
         />
-        <Modaladdplaylist />
+        <Modaladdplaylist newList={this.reLoad} />
         <ScrollView style={styles.scroll}>
           <TouchableOpacity onPress={() => {}}>
             <View style={styles.itemPlayList}>

@@ -17,21 +17,61 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 const {width, heigth} = Dimensions.get('window');
 
 class Modaladdplaylist extends Component {
-  state = {
-    modal: false,
-  };
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      modal: false,
+      tenPlayList: '',
+      maUser: '',
+    };
+  }
+
+  //kiểm tra user đã đăng nhập chưa
   checkUser = () => {
-    if (typeof global.user !== 'undefined' && this.state.modal == false) {
+    //typeof global.user !== 'undefined' &&
+    if (this.state.modal == false) {
       this.setState({modal: true});
     } else {
       Alert.alert('Thông báo', 'Vui lòng đăng nhập');
     }
   };
+
+  //handle click back
   back = () => {
     this.state.modal
       ? this.setState({modal: false})
       : this.setState({modal: true});
   };
+
+  //handle khi người dùng đã thêm xong (gọi hàm callback ở PlayList)
+  addPlayList = () => {
+    const data = {
+      TenPlayList: this.state.tenPlayList,
+      MaUser: global.user.MaUser,
+    };
+    console.log('data ', data);
+
+    // const requestOptions = {
+    //   method: 'POST',
+    //   headers: {
+    //     Accept: '*/*',
+    //     'Content-Type': 'application/json',
+    //   },
+    //   body: JSON.stringify(data),
+    // };
+    // fetch(
+    //   'https://b25c-2001-ee0-56b6-3790-7591-b50a-6b03-7ad8.ngrok.io/api/login',
+    //   requestOptions,
+    // )
+    //   .then(Response => Response.json())
+    //   .then(result => {})
+    //   .catch(error => {
+    //     Alert.alert('Thông báo', 'Vui lòng kiểm tra mạng');
+    //     console.error(error);
+    //   });
+  };
+
   render() {
     return (
       <View>
@@ -79,10 +119,16 @@ class Modaladdplaylist extends Component {
                 style={styles.input}
                 placeholder="Nhập tên Play list ..."
                 placeholderTextColor="#9D9D9D"
+                onChangeText={text => this.setState({tenPlayList: text})}
               />
             </View>
             <View style={styles.btnDone}>
-              <Button title="Xong" />
+              <Button
+                onPress={() => {
+                  this.addPlayList();
+                }}
+                title="Xong"
+              />
             </View>
           </View>
         </Modal>
