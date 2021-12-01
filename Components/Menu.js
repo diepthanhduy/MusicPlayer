@@ -39,42 +39,44 @@ class Menu extends Component {
     this.setState({toggleBtn: true});
     this.setState({returnData: {}});
     global.user = undefined;
+    global.isLoaded = 0;
   };
 
   //Xu ly login
   login = () => {
     const data = {TaiKhoan: this.state.user, MatKhau: this.state.pass};
     console.log(data);
-
-    const requestOptions = {
-      method: 'POST',
-      headers: {
-        Accept: '*/*',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
-    };
-    fetch(
-      'https://b25c-2001-ee0-56b6-3790-7591-b50a-6b03-7ad8.ngrok.io/api/login',
-      requestOptions,
-    )
-      .then(Response => Response.json())
-      .then(result => {
-        if (result.TaiKhoan != null) {
-          console.log(result);
-          Alert.alert('Thông báo', 'Đăng nhập thành công');
-          this.setState({returnData: result});
-          global.user = result;
-          this.setState({modalLogin: false});
-          this.setState({toggleBtn: false});
-        } else {
-          Alert.alert('Thông báo', 'Đăng nhập thất bại');
-        }
-      })
-      .catch(error => {
-        Alert.alert('Thông báo', 'Vui lòng kiểm tra mạng');
-        console.error(error);
-      });
+    if (this.state.user.length >= 6 && this.state.pass >= 6) {
+      const requestOptions = {
+        method: 'POST',
+        headers: {
+          Accept: '*/*',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      };
+      fetch(
+        'https://46a9-2001-ee0-56b6-3790-14c2-3eba-32e6-b985.ngrok.io/api/login',
+        requestOptions,
+      )
+        .then(Response => Response.json())
+        .then(result => {
+          if (result.TaiKhoan != null) {
+            console.log(result);
+            Alert.alert('Thông báo', 'Đăng nhập thành công');
+            this.setState({returnData: result});
+            global.user = result;
+            this.setState({modalLogin: false});
+            this.setState({toggleBtn: false});
+          } else {
+            Alert.alert('Thông báo', 'Đăng nhập thất bại');
+          }
+        })
+        .catch(error => {
+          Alert.alert('Thông báo', 'Vui lòng kiểm tra mạng');
+          console.error(error);
+        });
+    }
   };
 
   // Xu ly dang ky
@@ -85,36 +87,37 @@ class Menu extends Component {
       TenUser: this.state.userName,
     };
     console.log(data);
-
-    const requestOptions = {
-      method: 'POST',
-      headers: {
-        Accept: '*/*',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
-    };
-    fetch(
-      'https://b25c-2001-ee0-56b6-3790-7591-b50a-6b03-7ad8.ngrok.io/api/register',
-      requestOptions,
-    )
-      .then(Response => Response.json())
-      .then(result => {
-        if (result.TaiKhoan != null) {
-          console.log(result);
-          Alert.alert('Thông báo', 'Đăng ký thành công');
-          this.setState({returnData: result});
-          global.user = result;
-          this.setState({modalRegister: false});
-          this.setState({toggleBtn: false});
-        } else {
-          Alert.alert('Thông báo', 'Đăng ký thất bại');
-        }
-      })
-      .catch(error => {
-        Alert.alert('Thông báo', 'Vui lòng kiểm tra mạng');
-        console.error(error);
-      });
+    if (this.state.user >= 6 && this.state.pass >= 6) {
+      const requestOptions = {
+        method: 'POST',
+        headers: {
+          Accept: '*/*',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      };
+      fetch(
+        'https://46a9-2001-ee0-56b6-3790-14c2-3eba-32e6-b985.ngrok.io/api/register',
+        requestOptions,
+      )
+        .then(Response => Response.json())
+        .then(result => {
+          if (result.TaiKhoan != null) {
+            console.log(result);
+            Alert.alert('Thông báo', 'Đăng ký thành công');
+            this.setState({returnData: result});
+            global.user = result;
+            this.setState({modalRegister: false});
+            this.setState({toggleBtn: false});
+          } else {
+            Alert.alert('Thông báo', 'Đăng ký thất bại');
+          }
+        })
+        .catch(error => {
+          Alert.alert('Thông báo', 'Vui lòng kiểm tra mạng');
+          console.error(error);
+        });
+    }
   };
   render() {
     const {user, pass, returnData, userName} = this.state;
@@ -204,6 +207,10 @@ class Menu extends Component {
                 value={user}
               />
             </View>
+            {this.state.user.length < 6 ? (
+              <Text style={styles.textWarn}>Tài khoản ít nhất 6 ký tự</Text>
+            ) : null}
+
             <View style={styles.moUser}>
               <TextInput
                 editable
@@ -214,6 +221,9 @@ class Menu extends Component {
                 value={pass}
               />
             </View>
+            {this.state.pass.length < 6 ? (
+              <Text style={styles.textWarn}>Mật khẩu ít nhất 6 ký tự</Text>
+            ) : null}
             <TouchableOpacity
               style={styles.moBtnLogin}
               onPress={() => {
@@ -258,6 +268,9 @@ class Menu extends Component {
                 value={user}
               />
             </View>
+            {this.state.user.length < 6 ? (
+              <Text style={styles.textWarn}>Mật khẩu ít nhất 6 ký tự</Text>
+            ) : null}
             <View style={styles.moUser}>
               <TextInput
                 editable
@@ -268,6 +281,9 @@ class Menu extends Component {
                 value={pass}
               />
             </View>
+            {this.state.pass.length < 6 ? (
+              <Text style={styles.textWarn}>Mật khẩu ít nhất 6 ký tự</Text>
+            ) : null}
             <TouchableOpacity
               style={styles.moBtnLogin}
               onPress={() => {
@@ -339,6 +355,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#B467DA',
     height: 42,
+  },
+  textWarn: {
+    color: '#EE5147',
   },
 });
 

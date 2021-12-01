@@ -15,7 +15,6 @@ import 'react-native-gesture-handler';
 import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
-import ListSong from './Components/ListSong';
 import PlayList from './Components/PlayList';
 import Chart from './Components/Chart';
 import Menu from './Components/Menu';
@@ -90,28 +89,5 @@ const App: () => Node = () => {
     </NavigationContainer>
   );
 };
-
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//   },
-//   mainContainer: {
-//     flex: 1,
-//     justifyContent: 'center',
-//     alignItems: 'center',
-//   },
-//   bottomBox: {
-//     paddingVertical: 10,
-//     width: width,
-//     alignItems: 'center',
-//     borderTopWidth: 0.35,
-//     borderColor: '#ccc',
-//   },
-//   bottomControls: {
-//     flexDirection: 'row',
-//     justifyContent: 'space-between',
-//     width: '80%',
-//   },
-// });
 
 export default App;

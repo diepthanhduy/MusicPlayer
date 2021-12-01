@@ -13,36 +13,18 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import Sound from 'react-native-sound';
 
 const srtHostImg =
-  'https://b25c-2001-ee0-56b6-3790-7591-b50a-6b03-7ad8.ngrok.io/img/';
+  'https://46a9-2001-ee0-56b6-3790-14c2-3eba-32e6-b985.ngrok.io/img/';
 const strHostMp3 =
-  'https://b25c-2001-ee0-56b6-3790-7591-b50a-6b03-7ad8.ngrok.io/music/';
+  'https://46a9-2001-ee0-56b6-3790-14c2-3eba-32e6-b985.ngrok.io/music/';
 
 const Player = ({navigation, route}) => {
   const [name, setName] = useState('pause-outline');
   const [nameHeart, setNameHeart] = useState('heart-outline');
-  //const [music, setMusic] = useState({});
   const [urlMusic, setUrl] = useState(route.params.FileNhac);
   const [urlImage, setImg] = useState(route.params.FileAnh);
   const [nameSong, setNameSong] = useState(route.params.nameSong);
   const [nameSinger, setNameSinger] = useState(route.params.nameSinger);
-  //const [temp, setTemp] = useState(0);
   const [isLoading, setLoading] = useState(false);
-  // const play = () => {
-  //   var sound = new Sound(urlMusic, null, error => {
-  //     if (error) {
-  //       console.log(error);
-  //       return;
-  //     }
-  //     sound.play(success => {
-  //       console.log('end ', success);
-  //       setName('play-circle-outline');
-  //       sound.release();
-  //     });
-  //     setLoading(true);
-  //     setTemp(1);
-  //     setMusic(sound);
-  //   });
-  // };
 
   //load and play music
   useEffect(() => {
@@ -69,7 +51,7 @@ const Player = ({navigation, route}) => {
       global.music.pause();
       setLoading(false);
       fetch(
-        'https://b25c-2001-ee0-56b6-3790-7591-b50a-6b03-7ad8.ngrok.io/api/randsong',
+        'https://46a9-2001-ee0-56b6-3790-14c2-3eba-32e6-b985.ngrok.io/api/randsong',
       )
         .then(response => response.json())
         .then(json => {
@@ -85,7 +67,7 @@ const Player = ({navigation, route}) => {
     } else {
       setLoading(false);
       fetch(
-        'https://b25c-2001-ee0-56b6-3790-7591-b50a-6b03-7ad8.ngrok.io/api/randsong',
+        'https://46a9-2001-ee0-56b6-3790-14c2-3eba-32e6-b985.ngrok.io/api/randsong',
       )
         .then(response => response.json())
         .then(json => {

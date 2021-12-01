@@ -19,9 +19,9 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 const {width} = Dimensions.get('window');
 
 const srtHostImg =
-  'https://b25c-2001-ee0-56b6-3790-7591-b50a-6b03-7ad8.ngrok.io/img/';
+  'https://46a9-2001-ee0-56b6-3790-14c2-3eba-32e6-b985.ngrok.io/img/';
 const strHostMp3 =
-  'https://b25c-2001-ee0-56b6-3790-7591-b50a-6b03-7ad8.ngrok.io/music/';
+  'https://46a9-2001-ee0-56b6-3790-14c2-3eba-32e6-b985.ngrok.io/music/';
 
 //./ngrok authtoken 20Mvf0gzp6spGCIwCNfs8hsWYbE_3FFgUFUHbWXpae2P1nMeb
 
@@ -38,10 +38,11 @@ class ListSong extends Component {
   async getListSong() {
     try {
       const response = await fetch(
-        'https://b25c-2001-ee0-56b6-3790-7591-b50a-6b03-7ad8.ngrok.io/api/song',
+        'https://46a9-2001-ee0-56b6-3790-14c2-3eba-32e6-b985.ngrok.io/api/song',
       );
       const json = await response.json();
       this.setState({data: json});
+      global.isLoaded = 0;
     } catch (error) {
       console.log(error);
     } finally {
